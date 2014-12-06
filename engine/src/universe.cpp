@@ -406,6 +406,8 @@ void Universe::dumpOutput(const QByteArray &data)
         m_totalChannelsChanged = false;
     }
     m_outputPatch->dump(m_id, data);
+    // reset the changed flag until the next round
+    m_hasChanged = false;
 }
 
 void Universe::slotInputValueChanged(quint32 universe, quint32 channel, uchar value, const QString &key)
@@ -506,7 +508,11 @@ bool Universe::write(int channel, uchar value, bool forceLTP)
     }
 
     if (m_preGMValues != NULL)
+    {
+        if ((*m_preGMValues)[channel] != char(value))
+            m_hasChanged = true;
         (*m_preGMValues)[channel] = char(value);
+    }
 
     if (m_relativeValues[channel] != 0)
     {
@@ -518,8 +524,6 @@ bool Universe::write(int channel, uchar value, bool forceLTP)
 
     value = applyGM(channel, value);
     (*m_postGMValues)[channel] = char(value);
-
-    m_hasChanged = true;
 
     return true;
 }
