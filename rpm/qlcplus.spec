@@ -6,7 +6,7 @@ Group: Other
 Name: qlcplus
 Prefix: /usr
 Provides: qlcplus
-BuildRequires: qt-devel >= 4.6, libftdi-devel >= 0.17, libusb-devel >= 0.1.12, alsa-lib-devel >= 1.0.23
+BuildRequires: qt-devel >= 4.6, libftdi-devel >= 0.17, libusb-devel >= 0.1.12, alsa-lib-devel >= 1.0.23, systemd-devel, fftw-devel, liblo-devel
 Requires: qt >= 4.6
 Release: 1
 Source: qlcplus-%{version}.tar.gz
