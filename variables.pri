@@ -59,7 +59,11 @@ macx:BINDIR       = MacOS
 
 # Libraries
 win32:LIBSDIR      =
-unix:!macx:LIBSDIR = lib
+unix:!macx:contains(QMAKE_HOST.arch,x86_64):{
+        unix:!macx:LIBSDIR = lib64
+}else{
+        unix:!macx:LIBSDIR = lib
+}
 macx:LIBSDIR       = Frameworks
 
 # Data
